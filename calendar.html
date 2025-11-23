@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="موقع مخصص (لمعرفة التقويم الأكاديمي الجامعي لجامعة الملك خالد)">
+  <title>التقويم الأكاديمي الجامعي - موقع تطوعي</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #2c2c2c; /* لون الخلفية للوضع الليلي */
+      color: #f9f9f9; /* لون النص للوضع الليلي */
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #66cc66; /* اللون الجديد */
+      color: white;
+      padding: 20px 10px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section {
+      text-align: center;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #444; /* لون الخلفية للقسم */
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    section h2 {
+      color: #66cc66; /* اللون الجديد */
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    section p {
+      font-size: 18px;
+      color: #ccc; /* لون النص للوضع الليلي */
+      margin-bottom: 30px;
+    }
+
+    section img {
+      width: 100%;
+      max-width: 700px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px 0;
+      background-color: #66cc66; /* اللون الجديد */
+      color: white;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 600px) {
+      header, section h2 {
+        font-size: 20px;
+      }
+
+      section p {
+        font-size: 16px;
+      }
+    }
+
+    .LogoKKU {
+      display: flex; /* يجعل الرابط عنصر مرن */
+      justify-content: center; /* توسيط المحتوى أفقياً */
+      align-items: center; /* توسيط المحتوى عمودياً */
+      text-align: center; /* توسيط النص داخل الرابط (إذا كان موجوداً) */
+      margin: 20px; /* إضافة مسافة خارجية */
+    }
+
+    .LogoKKU img {
+      max-width: 150px; /* تحديد الحد الأقصى لعرض الصورة */
+      height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
+    }
+
+
+#visitor-count {
+  text-align: center; /* توسيط النص أفقيًا */
+  margin: 0 auto; /* إزالة أي هوامش إضافية */
+  font-size: 10px; /* حجم النص */
+  color: #f9f9f9; /* لون النص */
+}
+
+.noteText {
+  text-align: center; /* توسيط النص */
+  margin-top: 20px; /* إضافة مسافة علوية */
+  font-size: 16px; /* حجم النص */
+  color: #ccc; /* لون أفتح للنص */
+}
+  </style>
+</head>
+<body>
+  <main>
+    <a href="https://t.me/kku_4" target="_blank" class="LogoKKU">
+        <img src="https://upload.wikimedia.org/wikipedia/ar/7/75/%D8%B4%D8%B9%D8%A7%D8%B1_%D8%AC%D8%A7%D9%85%D8%B9%D8%A9_%D8%A7%D9%84%D9%85%D9%84%D9%83_%D8%AE%D8%A7%D9%84%D8%AF.png" alt="شعار جامعة الملك خالد">
+    </a>
+    <section>
+      <h2>التقويم الأكاديمي الجامعي لعام 1446هـ</h2>
+      <p>إليك التقويم الخاص بالعام الأكاديمي مع تفاصيل المواعيد الهامة.</p>
+      <img src="calendar.jpg" alt="ارقام التواصل">
+    </section>
+
+    <div id="visitor-count">جاري التحميل...</div>
+    <div class="noteText"><i class="fa fa-code"></i> الموقع تطوعي لخدمة الطلاب ولا يمثل جهة رسمية. </div>
+  </main>
+<script>
+// عدد الزوار 
+fetch('visitors.php')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('خطأ في الاتصال بالخادم');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.error) {
+            document.getElementById('visitor-count').innerText = 'خطأ: ' + data.error;
+        } else {
+            document.getElementById('visitor-count').innerText = `عدد الزائرين: ${data.visitors} زائر`;
+        }
+    })
+    .catch(error => {
+        document.getElementById('visitor-count').innerText = 'خطأ: ' + error.message;
+    });
+</script>
+  <div class="menu-iconn" id="menu-iconn" onclick="toggleMenuu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div id="sidebar-container"></div>
+  <script src="script.js"></script>
+</body>
+</html>

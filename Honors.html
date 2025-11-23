@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="موقع مخصص (لمعرفة شروط مراتب الشرف لجامعة الملك خالد)">
+  <title>مراتب الشرف - موقع تطوعي</title>
+  <!-- ربط ملف CSS الخاص بالقائمة الجانبية -->
+  <link rel="stylesheet" href="style.css">
+  <!-- رابط مكتبة Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #121212; /* لون خلفية الوضع الليلي */
+      color: #ffffff; /* لون النص */
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #66cc66; /* اللون الجديد */
+      color: white;
+      padding: 30px 10px;
+      text-align: center;
+      font-size: 30px; /* زيادة حجم الخط */
+      font-weight: bold;
+      border-bottom: 4px solid #fff; /* إضافة حد سفلي */
+      border-radius: 0 0 10px 10px; /* زوايا دائريّة */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* ظل */
+    }
+
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section {
+      text-align: right; /* محاذاة النص إلى اليمين */
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #1e1e1e; /* خلفية للصندوق */
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    section h2 {
+      color: #66cc66; /* اللون الجديد */
+      font-size: 28px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #66cc66; /* إضافة حد سفلي */
+      padding-bottom: 10px; /* مسافة بين النص والحد */
+    }
+
+    section p {
+      font-size: 18px;
+      color: #ddd; /* لون النص */
+      margin-bottom: 30px;
+    }
+
+    section ul {
+      text-align: right; /* محاذاة النص في القائمة إلى اليمين */
+      font-size: 18px;
+      color: #ddd; /* لون النص */
+      margin-bottom: 20px;
+      list-style-position: inside; /* وضع النقاط داخل القائمة */
+    }
+
+    section ul li {
+      margin-bottom: 15px;
+      padding-right: 30px; /* مسافة من اليمين */
+      position: relative;
+    }
+
+    section ul li i {
+      position: absolute;
+      right: 0; /* وضع الأيقونة على اليمين */
+      color: #66cc66; /* لون الأيقونة */
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px 0;
+      background-color: #66cc66; /* اللون الجديد */
+      color: white;
+      margin-top: 30px;
+      border-top: 4px solid #fff; /* إضافة حد علوي */
+      border-radius: 10px; /* زوايا دائريّة */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* ظل */
+    }
+
+visitorr {
+  display: block; /* معاملة العنصر كبلوك لتوسيطه */
+  text-align: center; /* توسيط النص أفقيًا */
+  margin: 10px auto 2px auto; /* تقليل الهامش السفلي إلى 5px */
+  font-size: 10px; /* حجم النص */
+  color: #f9f9f9; /* لون النص */
+}
+
+#visitor-count {
+  text-align: center; /* توسيط النص أفقيًا */
+  margin: 0 auto; /* إزالة أي هوامش إضافية */
+  font-size: 10px; /* حجم النص */
+  color: #f9f9f9; /* لون النص */
+}
+
+.noteText {
+  text-align: center; /* توسيط النص */
+  margin-top: 20px; /* إضافة مسافة علوية */
+  font-size: 16px; /* حجم النص */
+  color: #ccc; /* لون أفتح للنص */
+}
+
+    @media (max-width: 600px) {
+      header, section h2 {
+        font-size: 20px;
+      }
+
+      section p {
+        font-size: 16px;
+      }
+
+      section ul li {
+        font-size: 16px;
+      }
+    }
+
+    .LogoKKU {
+      display: flex; /* يجعل الرابط عنصر مرن */
+      justify-content: center; /* توسيط المحتوى أفقياً */
+      align-items: center; /* توسيط المحتوى عمودياً */
+      text-align: center; /* توسيط النص داخل الرابط (إذا كان موجوداً) */
+      margin: 20px; /* إضافة مسافة خارجية */
+    }
+
+    .LogoKKU img {
+      max-width: 150px; /* تحديد الحد الأقصى لعرض الصورة */
+      height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a href="https://t.me/kku_4" target="_blank" class="LogoKKU">
+      <img src="https://upload.wikimedia.org/wikipedia/ar/7/75/%D8%B4%D8%B9%D8%A7%D8%B1_%D8%AC%D8%A7%D9%85%D8%B9%D8%A9_%D8%A7%D9%84%D9%85%D9%84%D9%83_%D8%AE%D8%A7%D9%84%D8%AF.png" alt="شعار جامعة الملك خالد">
+    </a>
+    <section>
+      <h2>مراتب الشرف</h2>
+      <div style="border: 2px solid #66cc66; padding: 10px;">
+        <p><i class="fas fa-trophy"></i> تمنح مرتبة الشرف الأولى للطالب الحاصل على معدل تراكمي من 5 الى 4.75</p>
+        <p><i class="fas fa-medal"></i> تمنح مرتبة الشرف الثانية للطالب الحاصل على معدل تراكمي أقل من 4.75 الى 4.25</p>
+        <h3>شروط مراتب الشرف:</h3>
+        <ul>
+          <li><i class="fas fa-check-circle"></i> الا يكون الطالب قد رسب في أي مقرر طيلة فترة دراسته في الجامعة سواء جامعة الملك خالد او الجامعة المحول منها الطالب.</li>
+          <li><i class="fas fa-calendar-alt"></i> ان يكون الطالب قد أكمل متطلبات التخرج في مدة أقصاها متوسط الفترة بين الحد الأدنى والحد الأقصى للبقاء في الكلية.</li>
+          <li><i class="fas fa-university"></i> ان يكون الطالب قد درس في جامعة الملك خالد بما لا يقل عن (60%) من متطلبات التخرج.</li>
+        </ul>
+      </div>
+      <p style="text-align: center; margin-top: 20px;">
+        المصدر: <span class="source"><a href="https://dar.kku.edu.sa/faq/836" target="_blank" style="color: white;">اضغط هنا</a></span>
+      </p>
+    </section>
+  </main>
+
+    <div id="visitor-count">جاري التحميل...</div>
+  <script>
+// عدد الزوار 
+fetch('visitors.php')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('خطأ في الاتصال بالخادم');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.error) {
+            document.getElementById('visitor-count').innerText = 'خطأ: ' + data.error;
+        } else {
+            document.getElementById('visitor-count').innerText = `عدد الزائرين: ${data.visitors} زائر`;
+        }
+    })
+    .catch(error => {
+        document.getElementById('visitor-count').innerText = 'خطأ: ' + error.message;
+    });
+</script>
+  <!-- إضافة النص المطلوب في أسفل الصفحة -->
+  <div class="noteText">
+    <i class="fa fa-code"></i> الموقع تطوعي لخدمة الطلاب ولا يمثل جهة رسمية.
+  </div>
+  
+  <!-- زر الثلاث شرطات لفتح القائمة الجانبية -->
+  <div class="menu-iconn" id="menu-iconn" onclick="toggleMenuu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- الحاوية التي سيتم تحميل القائمة الجانبية فيها -->
+  <div id="sidebar-container"></div>
+  <!-- تضمين JavaScript الخاص بالتحكم في القائمة الجانبية -->
+  <script src="script.js"></script>
+</body>
+</html>

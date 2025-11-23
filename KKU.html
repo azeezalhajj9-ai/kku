@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="الصفحة الرئيسية لموقعنا التطوعي لخدمة جميع الطلاب، وبالأخص طلاب جامعة الملك خالد">
+    <title>جامعة الملك خالد - موقع تطوعي</title>
+<meta name="google-site-verification" content="JK2hzy_eRNaILg0a6LuenVFCOc9Ge90I97YUGjDqZj8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #f2f2f2;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.6;
+        }
+        .banner {
+            width: 100%;
+            max-width: 1200px;
+            height: 150px;
+            background-image: url('https://www.kku.edu.sa/_next/image?url=https%3A%2F%2Fwww.kku.edu.sa%2Fsites%2Fdefault%2Ffiles%2F2024-11%2Fkku_building.jpg&w=3840&q=75');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s; /* تأثير عند التحميل */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        h1 {
+            margin: 0;
+            font-size: 2em;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(0.9px);
+            padding: 5px 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s; /* تأثير التحول */
+        }
+        h1:hover {
+            transform: scale(1.05); /* تأثير تكبير عند التمرير */
+        }
+        h1 img {
+            width: 55px;
+            height: auto;
+            margin-left: 10px;
+        }
+        .intro {
+            max-width: 800px;
+            margin: 20px;
+            text-align: center;
+            font-size: 1em;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            transition: background-color 0.3s; /* تأثير تغيير اللون */
+        }
+        .intro:hover {
+            background-color: rgba(0, 0, 0, 0.5); /* تغيير لون الخلفية عند التمرير */
+        }
+        .intro i {
+            font-size: 1.5em;
+            margin-left: 10px;
+        }
+        .source {
+            font-size: 0.9em;
+            color: #D9D9D9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            flex-direction: row-reverse;
+        }
+        .source a {
+            color: #D9D9D9;
+            text-decoration: underline;
+            margin-left: 5px;
+            transition: color 0.3s; /* تأثير تغيير اللون */
+        }
+        .source a:hover {
+            color: #66cc66; /* تغيير اللون عند التمرير */
+        }
+        .alert {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            background-color: rgba(255, 0, 0, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s; /* تأثير تغيير الخلفية */
+        }
+        .alert:hover {
+            background-color: rgba(255, 0, 0, 0.2); /* تغيير الخلفية عند التمرير */
+        }
+        .alert i {
+            margin-right: 5px;
+            font-size: 1.2em;
+        }
+        .container {
+            max-width: 800px;
+            margin-top: 30px;
+            padding: 20px;
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .container li {
+            margin: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+            position: relative;
+            flex: 1 1 30%;
+            max-width: 200px;
+        }
+        .container li:hover {
+            transform: scale(1.05);
+        }
+        .container a {
+            text-decoration: none;
+            color: #F2F2F2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: color 0.3s; /* إضافة تأثير تفاعلي */
+        }
+        .container a:hover {
+            color: #66cc66;
+        }
+        .container i {
+            font-size: 3em;
+            margin-bottom: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #2A2A2A;
+            transition: box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .container li:hover i {
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.3);
+        }
+        .footer {
+            width: 90%;
+            background-color: #2A2A2A;
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+            border-top: 1px solid #F2F2F2;
+        }
+        .footer p {
+            margin: 10px 0;
+            color: #D9D9D9;
+        }
+        .footer a {
+            color: #D9D9D9;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.5em;
+            transition: color 0.3s; /* تأثير تغيير اللون */
+        }
+        .footer a:hover {
+            color: #66cc66;
+        }
+        @media (min-width: 1200px) {
+            .container li {
+                flex: 1 1 25%;
+            }
+        }
+        @media (max-width: 767px) {
+            .container li {
+                flex: 1 1 25%;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+        .divider {
+            display: flex;
+            align-items: center;
+            width: 80%;
+            margin: 20px 0;
+        }
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-top: 1px solid #F2F2F2;
+        }
+        .divider span {
+            margin: 0 15px;
+            font-size: 1.2em;
+            color: #F2F2F2;
+        }
+visitorr {
+  display: block; /* معاملة العنصر كبلوك لتوسيطه */
+  text-align: center; /* توسيط النص أفقيًا */
+  margin: 10px auto 2px auto; /* تقليل الهامش السفلي إلى 5px */
+  font-size: 10px; /* حجم النص */
+  color: #f9f9f9; /* لون النص */
+}
+
+#visitor-count {
+  text-align: center; /* توسيط النص أفقيًا */
+  margin: 0 auto; /* إزالة أي هوامش إضافية */
+  font-size: 10px; /* حجم النص */
+  color: #f9f9f9; /* لون النص */
+}
+    </style>
+</head>
+<body>
+
+    <div class="banner">
+        <h1>جامعة الملك خالد <img src="https://upload.wikimedia.org/wikipedia/ar/7/75/%D8%B4%D8%B9%D8%A7%D8%B1_%D8%AC%D8%A7%D9%85%D8%B9%D8%A9_%D8%A7%D9%84%D9%85%D9%84%D9%83_%D8%AE%D8%A7%D9%84%D8%AF.png" alt="شعار جامعة الملك خالد"></h1>
+    </div>
+
+    <div class="intro">
+        <i class="fas fa-info-circle"></i>
+        <p>جامعة الملك خالد جامعة حكومية مقرها في مدينة أبها جنوب غربي المملكة العربية السعودية، تأسست عام 1998م/ 1419هـ، خلال زيارة خادم الحرمين الشريفين الملك عبد الله بن عبد العزيز حينما كان ولياً للعهد، وذلك في يوم الثلاثاء 9/1/1419 هـ المتضمن الموافقة على دمج فرعي جامعة الإمام محمد بن سعود الإسلامية وجامعة الملك سعود بمنطقة عسير تحت مسمى جامعة الملك خالد</p>
+    </div>
+
+    <div class="source">
+        <p>المصدر ويكيبيديا: <a href="https://ar.m.wikipedia.org/wiki/جامعة_الملك_خالد" target="_blank">أضغط هنا</a></p>
+    </div>
+
+    <div class="alert">
+        <span>هذا الموقع تطوعي لخدمة الطلاب ولا يمثل جهة رسمية</span>
+        <i class="fas fa-exclamation-triangle"></i>
+    </div>
+    
+    <div class="divider">
+        <span>أقسام الموقع</span>
+    </div>
+
+    <ul class="container">
+        <li><a href="rate" id="link1"><i class="fas fa-calculator"></i> حاسبة الغياب</a></li>
+        <li><a href="money" id="link2"><i class="fas fa-clock"></i> عد تنازلي للمكافأة</a></li>
+        <li><a href="Deanship" id="link3"><i class="fas fa-phone"></i> أرقام التواصل</a></li>
+        <li><a href="calendar" id="link4"><i class="fas fa-calendar-alt"></i> التقويم</a></li>
+        <li><a href="Final" id="link5"><i class="fas fa-graduation-cap"></i> الفاينل</a></li>
+        <li><a href="date" id="link6"><i class="fas fa-calendar-day"></i> التاريخ</a></li>
+        <li><a href="Internal-transfer-terms" id="link7"><i class="fas fa-exchange-alt"></i> شروط التحويل الداخلي</a></li>
+        <li><a href="External-transfer" id="link8"><i class="fas fa-exchange-alt"></i> شروط التحويل الخارجي</a></li>
+        <li><a href="Plans" id="link9"><i class="fas fa-th-large"></i> الخطط</a></li>
+        <li><a href="Apology-material" id="link10"><i class="fas fa-book-reader"></i> الاعتذار عن مادة</a></li>
+        <li><a href="Masters-requirements" id="link11"><i class="fas fa-university"></i> شروط الماجستير</a></li>
+        <li><a href="Honors" id="link12"><i class="fas fa-trophy"></i> مراتب الشرف</a></li>
+        <li><a href="Evolve" id="link13"><i class="fas fa-book"></i> ايفولف - Evolve</a></li>
+        <li><a href="gpa" id="link14"><i class="fas fa-pencil-alt"></i> المعدل الفصلي</a></li>
+        <li><a href="grade" id="link15"><i class="fas fa-medal"></i> رموز الدرجات والمعدل</a></li>
+        <li><a href="advice" id="link16"><i class="fas fa-lightbulb"></i> نصائح مهمة</a></li>
+        <li><a href="https://t.me/kku_4" target="_blank" id="link17"><i class="fas fa-globe"></i> قروب عام غير رسمي</a></li>
+    </ul>
+    <div class="alert">
+        <span>الموقع لا يجمع بيانات شخصية أو عامة</span>
+        <i class="fas fa-user-slash"></i>
+    </div>
+
+    <div id="visitor-count">جاري التحميل...</div>
+    <div class="footer">
+        <p>يمكنك متابعة أحدث أخبار الجامعة عبر حساباتها الرسمية</p>
+        <a href="https://www.kku.edu.sa" target="_blank"><i class="fas fa-globe"></i></a>
+        <a href="https://twitter.com/KKUEDUKSA" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/KKUEDUKSA/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.snapchat.com/add/KKUEDUKSA" target="_blank"><i class="fab fa-snapchat-square"></i></a>
+        <a href="https://t.me/KKUEDUKSA" target="_blank"><i class="fab fa-telegram"></i></a>
+    </div>
+<script>
+// عدد الزوار 
+fetch('visitors.php')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('خطأ في الاتصال بالخادم');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.error) {
+            document.getElementById('visitor-count').innerText = 'خطأ: ' + data.error;
+        } else {
+            document.getElementById('visitor-count').innerText = `عدد الزائرين: ${data.visitors} زائر`;
+        }
+    })
+    .catch(error => {
+        document.getElementById('visitor-count').innerText = 'خطأ: ' + error.message;
+    });
+</script>
+</body>
+</html>

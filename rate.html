@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="موقع مخصص لحساب نسبة الغياب (20٪ للمسارات الصحية والهندسية و 25٪ لباقي التخصصات)">
+    <title>حاسبة الغياب - موقع تطوعي</title>
+ <!-- ربط ملف CSS الخاص بالقائمة الجانبية -->
+  <link rel="stylesheet" href="style.css">
+
+    <!-- إضافة مكتبة Font Awesome للأيقونات -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* إعداد الوضع الليلي */
+        :root {
+            --background-color: #121212;
+            --text-color: #ffffff;
+            --accent-color: #66cc66;
+            --button-bg-color: #333333;
+            --button-hover-bg-color: #444444;
+            --container-bg-color: #1e1e1e;
+            --border-color: #444444;
+            --warning-color: #ff4444;
+            --chart-color-1: #28a745;
+            --chart-color-2: #ff6666;
+            --chart-color-3: #CB4154;
+            --chart-color-4: #cc0000;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            text-align: center;
+            padding: 20px;
+            color: var(--text-color);
+            direction: rtl; /* جعل الاتجاه من اليمين إلى اليسار */
+        }
+
+        h1 {
+            color: var(--text-color);
+            font-size: 26px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        visitorr {
+            color: var(--text-color);
+            font-size: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 120px;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            background-color: var(--container-bg-color);
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            border: 1px solid var(--border-color);
+            text-align: right; /* لضبط النصوص والأيقونات على اليمين */
+        }
+
+        input,
+        select,
+        button {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--button-bg-color);
+            color: var(--text-color);
+        }
+
+        button {
+            background-color: var(--button-bg-color);
+            color: var(--text-color);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: var(--button-hover-bg-color);
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .warning1 {
+            color: var(--warning-color);
+        }
+
+        .warning2 {
+            color: var(--warning-color);
+            text-decoration: underline;
+        }
+
+        .warning3 {
+            color: var(--warning-color);
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        .note {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #cccccc;
+            text-align: right; /* لضبط النصوص والأيقونات على اليمين */
+        }
+
+        .tips {
+            margin-top: 20px;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-align: right; /* لضبط النصوص والأيقونات على اليمين */
+        }
+
+        .share-button {
+            background-color: var(--button-bg-color);
+            color: var(--text-color);
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+            text-align: right; /* لضبط النصوص والأيقونات على اليمين */
+        }
+
+        .share-button:hover {
+            background-color: var(--button-hover-bg-color);
+        }
+
+        /* إخفاء المربع الخاص بالرسم البياني افتراضيًا */
+        .chart-container {
+            margin-top: 20px;
+            background-color: var(--container-bg-color);
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            border: 1px solid var(--border-color);
+            display: none; /* إخفاء المربع افتراضيًا */
+        }
+
+        .download-button {
+            background-color: var(--button-bg-color);
+            color: var(--text-color);
+            padding: 12px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+            width: 200px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        .download-button:hover {
+            background-color: var(--button-hover-bg-color);
+        }
+
+        /* شاشة منبثقة */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .popup.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .popup-content {
+            background-color: var(--container-bg-color);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            width: 350px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .popup img {
+            width: 120px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        .group-rules-popup {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 0.9em;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .group-rules-popup ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+
+        .group-rules-popup li {
+            margin-bottom: 8px;
+        }
+
+        .group-rules-popup li i {
+            margin-left: 10px;
+            color: var(--text-color);
+        }
+
+
+#visitor-count {
+  text-align: center; /* توسيط النص أفقيًا */
+  margin: 0 auto; /* إزالة أي هوامش إضافية */
+  font-size: 10px; /* حجم النص */
+  color: #f9f9f9; /* لون النص */
+}
+
+        .noteText {
+            display: flex;
+            justify-content: center; /* لتوسيط المحتوى أفقيًا */
+            align-items: center; /* لتوسيط المحتوى عموديًا */
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #cccccc;
+            text-align: center; /* لتوسيط النصوص */
+        }
+
+        .note i {
+            margin-left: 8px; /* مسافة بين الأيقونة والنص */
+        }
+
+        .close-button {
+            background-color: var(--warning-color);
+            color: var(--text-color);
+            border: none;
+            padding: 8px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-size: 0.8em;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-button:hover {
+            background-color: #cc0000;
+        }
+
+        .disclaimer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #cccccc;
+            text-align: right; /* لضبط النصوص والأيقونات على اليمين */
+        }
+
+        #instructionImage {
+            display: none;
+            width: 100%;
+            max-width: 350px;
+            margin: 20px auto;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        .icon {
+            margin-left: 8px; /* لتوفير مساحة بين الأيقونة والنص */
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- جعل الصورة قابلة للنقر لتوجيه المستخدم إلى رابط القروب -->
+    <a href="https://t.me/kku_4" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/ar/7/75/%D8%B4%D8%B9%D8%A7%D8%B1_%D8%AC%D8%A7%D9%85%D8%B9%D8%A9_%D8%A7%D9%84%D9%85%D9%84%D9%83_%D8%AE%D8%A7%D9%84%D8%AF.png" alt="شعار جامعة الملك خالد" class="logo">
+    </a>
+
+    <h1>
+    <i class="fas fa-calculator icon"></i> حاسبة الغياب - موقع تطوعي</h1>
+
+    <div class="container">
+
+        <!-- اختيار نوع الحساب -->
+        <label for="calculationType"><i class="fa fa-cog"></i> نوع النسبة</label>
+        <select id="calculationType" onchange="toggleInputs()" required>
+            <option value="individual">نسبة فردية</option>
+            <option value="overall">نسبة كلية</option>
+        </select>
+
+        <!-- إدخال النسبة الفردية -->
+        <div id="individualInputs">
+            <label for="attendance"><i class="fas fa-percentage icon"></i> نسبة الغياب لمادة واحدة</label>
+            <input type="number" id="attendance" placeholder="أدخل نسبة الغياب" step="0.01">
+        </div>
+
+        <!-- إدخال النسبة الكلية وعدد أيام الغياب -->
+        <div id="overallInputs" style="display: none;">
+            <label for="overallPercentage"><i class="fas fa-percentage icon"></i> النسبة الكلية</label>
+            <input type="number" id="overallPercentage" placeholder="أدخل النسبة الكلية" step="0.01">
+
+            <label for="absenceDays"><i class="fas fa-calendar-times icon"></i> عدد أيام الغياب</label>
+            <input type="number" id="absenceDays" placeholder="أدخل عدد أيام الغياب">
+        </div>
+
+        <label for="type"><i class="fas fa-user-graduate icon"></i> نوع التخصص</label>
+        <select id="type" required>
+            <option value="normal">تخصص عادي</option>
+            <option value="health">التخصصات الصحية والمسار الهندسي</option>
+        </select>
+        <div class="note"><i class="fa fa-exclamation-triangle"></i> صورة توضيحية: </div>
+<img id="instructionImage" src="https://i.postimg.cc/1XQk2Xfm/Picsart-24-11-21-02-32-42-858.jpg" alt="تعليمات حساب النسبة الكلية">
+        <button onclick="calculateAbsence()"><i class="fas fa-divide icon"></i> احسب نسبة الغياب</button>
+        <div class="result" id="result"></div>
+        <div class="tips" id="tips"></div>
+        <div class="note"><i class="fas fa-info-circle icon"></i>يرجى ملاحظة أن جميع الحسابات تقريبية وليست دقيقة بنسبة (100%).</div>
+    </div>
+        <!-- الايقونه الي بالمنتصف -->
+        <!--<div class="noteText"><i class="fas fa-arrows-alt-v"></i></div>-->
+        <div class="noteText"></div>
+    <!-- الرسم البياني -->
+    <div class="chart-container" id="chartContainer">
+        <canvas id="absenceChart"></canvas>
+        <button class="download-button" onclick="downloadChartAsImage()">تحميل الرسم البياني كصورة</button>
+    </div>
+    <div id="visitor-count">جاري التحميل...</div>
+    <div class="noteText"><i class="fa fa-code"></i> الموقع تطوعي لخدمة الطلاب ولا يمثل جهة رسمية. </div>
+    
+    <!-- شاشة منبثقة -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <a href="https://t.me/kku_4" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/ar/7/75/%D8%B4%D8%B9%D8%A7%D8%B1_%D8%AC%D8%A7%D9%85%D8%B9%D8%A9_%D8%A7%D9%84%D9%85%D9%84%D9%83_%D8%AE%D8%A7%D9%84%D8%AF.png" alt="شعار جامعة الملك خالد">
+            </a>
+            <p><i class="fa fa-link"></i> للدخول إلى مجموعة جامعة الملك خالد يرجى الضغط على الصورة</p>
+<div class="empty-line"></div>
+<p><i class="fa fa-users"></i> القروب من عمل طلاب متطوعين يهدف للإجابة على استفسارات الطلاب ولا يمثل جهة رسمية</p>
+
+            <div class="group-rules-popup">
+                <strong>شروط القروب:</strong>
+                <ul>
+                    <li><i class="fas fa-ban icon"></i>يمنع نشر المواضيع الخارجية والروابط والإعلانات بشتى أنواعها</li>
+                    <li><i class="fas fa-comments icon"></i>الأحاديث الجانبية ممنوعة.</li>
+                    <li><i class="fas fa-exclamation-triangle icon"></i>السب والشتم والسخرية ممنوعة</li>
+                    <li><i class="fas fa-user-slash icon"></i>مخالفة شروط القروب يعرضك للطرد</li>
+                </ul>
+            </div>
+
+            <button class="close-button" onclick="closePopup()">إغلاق</button>
+        </div>
+    </div>
+
+    
+<!-- زر الثلاث شرطات لفتح القائمة الجانبية -->
+  <div class="menu-iconn" id="menu-iconn" onclick="toggleMenuu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- الحاوية التي سيتم تحميل القائمة الجانبية فيها -->
+  <div id="sidebar-container"></div>
+  <!-- تضمين JavaScript الخاص بالتحكم في القائمة الجانبية -->
+  <script src="script.js"></script>
+    <script>
+    
+        // إظهار الشاشة المنبثقة عند تحميل الصفحة
+        window.onload = function () {
+            document.getElementById('popup').classList.add('show');
+        };
+
+        function closePopup() {
+            document.getElementById('popup').classList.remove('show');
+        }
+
+        function toggleInputs() {
+        const calculationType = document.getElementById("calculationType").value;
+        const individualInputs = document.getElementById("individualInputs");
+        const overallInputs = document.getElementById("overallInputs");
+        const instructionImage = document.getElementById("instructionImage");
+
+        if (calculationType === "individual") {
+            individualInputs.style.display = "block";
+            overallInputs.style.display = "none";
+            instructionImage.style.display = "none"; // إخفاء الصورة
+        } else {
+            individualInputs.style.display = "none";
+            overallInputs.style.display = "block";
+            instructionImage.style.display = "block"; // إظهار الصورة
+        }
+    }
+
+        let chart;
+
+        function calculateAbsence() {
+            const calculationType = document.getElementById("calculationType").value;
+            const type = document.getElementById("type").value;
+            const maxAbsence = (type === "normal") ? 25 : 20;
+
+            let attendance;
+            if (calculationType === "individual") {
+                attendance = parseFloat(document.getElementById("attendance").value);
+            } else {
+                const overallPercentage = parseFloat(document.getElementById("overallPercentage").value);
+                const absenceDays = parseInt(document.getElementById("absenceDays").value);
+                attendance = overallPercentage / absenceDays;
+            }
+
+            if (!attendance || attendance <= 0) {
+                alert("يرجى إدخال نسبة غياب صحيحة.");
+                return;
+            }
+
+            const remainingDays = Math.floor(maxAbsence / attendance);
+            const warningLevels = { first: 10, second: 15 };
+
+            let warning = "";
+            let warningClass = "";
+
+            if (attendance >= warningLevels.first && attendance < warningLevels.second) {
+                warning = `تنبيه: وصلت إلى الإنذار الأول (${warningLevels.first}%)`;
+                warningClass = "warning1";
+            } else if (attendance >= warningLevels.second && attendance < maxAbsence) {
+                warning = `تنبيه: وصلت إلى الإنذار الثاني (${warningLevels.second}%)`;
+                warningClass = "warning2";
+            } else if (attendance >= maxAbsence) {
+                warning = "تحذير: متوقع حرمانك راجع دكتور المادة!";
+                warningClass = "warning3";
+            }
+
+            document.getElementById("result").innerHTML = `
+                <p>نسبة الغياب الفردية: (${attendance.toFixed(2)}%)</p>
+                <p>يمكنك غياب (${remainingDays}) محاضرة قبل الوصول للحرمان.</p>
+                <p> <i class="fa fa-exclamation-triangle"></i> علمًا أن عدد المحاضرات هي الإجمالي للغياب للوصول للحرمان.</p>
+                <p class="${warningClass}">${warning}</p>
+            `;
+
+            updateChart(attendance, warningLevels, maxAbsence, remainingDays);
+        }
+
+        function updateChart(attendance, warningLevels, maxAbsence, remainingDays) {
+            const data = {
+                labels: ['نسبة الغياب', `إنذار أول (${warningLevels.first}%)`, `إنذار ثاني (${warningLevels.second}%)`, `الحرمان (${maxAbsence}%)`],
+                datasets: [{
+                    label: 'نسبة الغياب',
+                    data: [attendance, warningLevels.first, warningLevels.second, maxAbsence],
+                    backgroundColor: ['#28a745', '#ff6666', '#CB4154', '#cc0000'],
+                    hoverOffset: 4
+                }]
+            };
+
+            const config = {
+                type: 'doughnut',
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (tooltipItem) {
+                                    return `${tooltipItem.label}: ${tooltipItem.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            if (chart) {
+                chart.destroy();
+            }
+
+            chart = new Chart(document.getElementById('absenceChart'), config);
+
+            document.getElementById('chartContainer').style.display = 'block';
+        }
+
+        function downloadChartAsImage() {
+            const link = document.createElement('a');
+            link.href = document.getElementById('absenceChart').toDataURL('image/png');
+            link.download = 'Charts-kku_4.png';
+            link.click();
+        }
+        // وظيفة لإعادة تعبئة الحقول وتدمير الرسم البياني
+function resetInputsAndDestroyChart() {
+    // إعادة تعبئة الحقول
+    document.getElementById("attendance").value = "";
+    document.getElementById("overallPercentage").value = "";
+    document.getElementById("absenceDays").value = "";
+    document.getElementById("result").innerText = "";
+    document.getElementById("tips").innerText = "";
+
+    // تدمير الرسم البياني إذا كان موجودًا
+    if (chart) {
+        chart.destroy();
+        chart = null; // تعيين الرسم البياني كقيمة فارغة
+    }
+
+    // إخفاء قسم الرسم البياني
+    document.getElementById("chartContainer").style.display = "none";
+}
+
+// إضافة مستمع الحدث عند تغيير نوع النسبة
+document.getElementById("calculationType").addEventListener("change", () => {
+    resetInputsAndDestroyChart();
+    toggleInputs(); // تحديث الحقول بناءً على نوع النسبة
+});
+
+// إضافة مستمع الحدث عند تغيير نوع التخصص
+document.getElementById("type").addEventListener("change", resetInputsAndDestroyChart);
+fetch('visitors.php')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('خطأ في الاتصال بالخادم');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.error) {
+            document.getElementById('visitor-count').innerText = 'خطأ: ' + data.error;
+        } else {
+            document.getElementById('visitor-count').innerText = `عدد الزائرين: ${data.visitors} زائر`;
+
+        }
+    })
+    .catch(error => {
+        document.getElementById('visitor-count').innerText = 'خطأ: ' + error.message;
+    });
+    </script>
+</body>
+
+</html>
+</body>
+
+</html>

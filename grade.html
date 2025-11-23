@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="موقع مخصص (لمعرفة رموز الدرجات والمعدل)">
+    <title>رموز الدرجات والمعدل - موقع تطوعي</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 15px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #16a085;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 16px;
+    color: #16a085;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.language-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 15px 0;
+}
+
+.language-button {
+    padding: 8px 15px;
+    background-color: #16a085;
+    color: #fff;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.language-button:hover {
+    background-color: #1abc9c;
+}
+
+.language-button.active {
+    transform: scale(1.1);
+    background-color: #e74c3c;
+}
+
+.content-box, .content-box2 {
+    background-color: #1E1E1E;
+    padding: 15px; /* تقليص الحشو */
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 600px; /* تقليص العرض الأقصى */
+    margin: 15px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    background-color: #34495e;
+    border-radius: 5px;
+    font-size: 10px; /* تقليص حجم الخط */
+}
+
+th, td {
+    padding: 6px; /* تقليص الحشو */
+    text-align: center;
+    border: 1px solid #16a085;
+}
+
+th {
+    background-color: #16a085;
+    color: white;
+}
+
+tr:hover {
+    background-color: #FF6347;
+}
+
+.share-button {
+    padding: 10px 20px;
+    background-color: #16A085;
+    color: #fff;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    transition: all 0.3s ease;
+}
+
+.share-button:hover {
+    background-color: #1abc9c;
+    transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 20px;
+    }
+
+    h2 {
+        font-size: 14px;
+    }
+
+    table {
+        font-size: 8px; /* تقليص الحجم بشكل أكبر للأجهزة الصغيرة */
+    }
+
+    .language-button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .share-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+
+#visitor-count {
+    text-align: center;
+    font-size: 12px;
+    color: #f9f9f9;
+}
+
+.noteText {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.withdrawn-excused {
+    background-color: #004939;
+    color: #fff;
+}
+
+
+    </style>
+</head>
+<body>
+    <h1><i class="fas fa-medal"></i> رموز الدرجات والمعدل</h1>
+
+    <div class="language-buttons">
+        <button class="language-button active" onclick="showTable('grades', this)">
+            <i class="fas fa-graduation-cap"></i> رموز الدرجات
+        </button>
+        <button class="language-button" onclick="showTable('gpa', this)">
+            <i class="fas fa-trophy"></i> رموز المعدل
+        </button>
+    </div>
+
+    <div class="content-box" id="grades-table">
+        <h2><i class="fas fa-graduation-cap"></i> رموز الدرجات</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>الدرجة المئوية</th>
+                    <th>التقدير</th>
+                    <th>الرمز</th>
+                    <th>الرمز E</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>95-100</td>
+                    <td>ممتاز مرتفع</td>
+                    <td>أ+</td>
+                    <td>+A</td>
+                </tr>
+                <tr>
+                    <td>90-94</td>
+                    <td>ممتاز</td>
+                    <td>أ</td>
+                    <td>A</td>
+                </tr>
+                <tr>
+                    <td>85-89</td>
+                    <td>جيد جدًا مرتفع</td>
+                    <td>ب+</td>
+                    <td>+B</td>
+                </tr>
+                <tr>
+                    <td>80-84</td>
+                    <td>جيد جدًا</td>
+                    <td>ب</td>
+                    <td>B</td>
+                </tr>
+                <tr>
+                    <td>75-79</td>
+                    <td>جيد مرتفع</td>
+                    <td>ج+</td>
+                    <td>+C</td>
+                </tr>
+                <tr>
+                    <td>70-74</td>
+                    <td>جيد</td>
+                    <td>ج</td>
+                    <td>C</td>
+                </tr>
+                <tr>
+                    <td>65-69</td>
+                    <td>مقبول مرتفع</td>
+                    <td>د+</td>
+                    <td>+D</td>
+                </tr>
+                <tr>
+                    <td>60-64</td>
+                    <td>مقبول</td>
+                    <td>د</td>
+                    <td>D</td>
+                </tr>
+                <tr>
+                    <td>0-59</td>
+                    <td>متعثر</td>
+                    <td>هـ</td>
+                    <td>F</td>
+               </tr>
+               <tr class="withdrawn-excused">
+                    <td>---</td>
+                    <td>مستمر</td>
+                    <td>م</td>
+                    <td>IP</td>
+               </tr>
+               <tr class="withdrawn-excused">
+                    <td>---</td>
+                    <td>غير مكتمل</td>
+                    <td>ل</td>
+                    <td>IC</td>
+               </tr>
+               <tr class="withdrawn-excused">
+                    <td>---</td>
+                    <td>محروم</td>
+                    <td>ح</td>
+                    <td>DN</td>
+               </tr>
+               <tr class="withdrawn-excused">
+                    <td>+60</td>
+                    <td>ناجح دون درجة</td>
+                    <td>ند</td>
+                    <td>NP</td>
+               </tr>
+               <tr class="withdrawn-excused">
+                    <td>-60</td>
+                    <td>راسب دون درجة</td>
+                    <td>هد</td>
+                    <td>NF</td>
+               </tr>
+               <tr class="withdrawn-excused">
+                    <td>---</td>
+                    <td>منسحب بعذر</td>
+                    <td>ع</td>
+                    <td>W</td>
+               </tr>
+               <tr class="withdrawn-excused">
+                    <td>---</td>
+                    <td>معفي</td>
+                    <td>عف</td>
+                    <td>E</td>
+                </tr>
+            </tbody>
+        </table>
+            <div class="share-button" onclick="sharePage()">
+        <i class="fas fa-share-alt"></i> مشاركة
+    </div>
+
+    </div>
+
+    <div class="content-box2" id="gpa-table" style="display: none;">
+        <h2><i class="fas fa-trophy"></i> رموز المعدل</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>المعدل</th>
+                    <th>التقدير</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>4.50-5.00</td>
+                    <td>ممتاز</td>
+                </tr>
+                <tr>
+                    <td>3.75-4.49</td>
+                    <td>جيد جدًا</td>
+                </tr>
+                <tr>
+                    <td>2.75-3.74</td>
+                    <td>جيد</td>
+                </tr>
+                <tr>
+                    <td>2.00-2.74</td>
+                    <td>مقبول</td>
+                </tr>
+                <tr>
+                    <td>1.99-0</td>
+                    <td>متعثر</td>
+                </tr>
+            </tbody>
+        </table>
+      <div class="share-button" onclick="sharePage()">
+        <i class="fas fa-share-alt"></i> مشاركة
+    </div>
+
+    </div>
+<script>
+// عدد الزوار 
+fetch('visitors.php')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('خطأ في الاتصال بالخادم');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.error) {
+            document.getElementById('visitor-count').innerText = 'خطأ: ' + data.error;
+        } else {
+            document.getElementById('visitor-count').innerText = `عدد الزائرين: ${data.visitors} زائر`;
+        }
+    })
+    .catch(error => {
+        document.getElementById('visitor-count').innerText = 'خطأ: ' + error.message;
+    });
+
+        function showTable(table, button) {
+            document.getElementById('grades-table').style.display = table === 'grades' ? 'block' : 'none';
+            document.getElementById('gpa-table').style.display = table === 'gpa' ? 'block' : 'none';
+
+            // تفعيل الزر المحدد
+            const buttons = document.querySelectorAll('.language-button');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.style.transform = 'scale(1)';
+            });
+            button.classList.add('active');
+            button.style.transform = 'scale(1.1)';
+        }
+
+        function sharePage() {
+            const url = window.location.href;
+            if (navigator.share) {
+                navigator.share({
+                    title: document.title,
+                    url: url
+                }).then(() => {
+                    alert('تمت مشاركة الصفحة!');
+                }).catch((error) => {
+                    console.error('Error sharing:', error);
+                });
+            } else {
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('تم نسخ الرابط!');
+                }).catch((error) => {
+                    console.error('Error copying to clipboard:', error);
+                });
+            }
+        }
+    </script>
+
+    <div id="visitor-count">جاري التحميل...</div>
+    <div class="noteText"><i class="fa fa-code"></i> الموقع تطوعي لخدمة الطلاب ولا يمثل جهة رسمية. </div>
+    </main>
+    <div class="menu-iconn" id="menu-iconn" onclick="toggleMenuu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div id="sidebar-container"></div>
+    <script src="script.js"></script>
+</body>
+</html>

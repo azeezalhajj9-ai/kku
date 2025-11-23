@@ -1,0 +1,283 @@
+/* تنسيقات عامة */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f7fc;
+  transition: background-color 0.3s ease;
+}
+
+/* القائمة الجانبية */
+.menu-iconn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #66cc66;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, background-color 0.3s, opacity 0.3s;
+}
+
+.menu-iconn div {
+  width: 70%;
+  height: 3px;
+  background-color: white;
+  margin: 3px 0;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.menu-iconn:hover {
+  transform: scale(1.1);
+  background-color: #55bb55;
+}
+
+.menu-iconn.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* القائمة الجانبية */
+.sidebarr {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 300px;
+  height: 100%;
+  background: linear-gradient(145deg, #2a2a3b, #232332);
+  color: #ddd;
+  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.5);
+  transition: right 0.4s ease-in-out, transform 0.4s;
+  z-index: 999;
+  overflow-y: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.sidebarr img {
+  width: 100px;
+  height: auto;
+  margin: 0 auto 20px;
+  display: block;
+}
+
+.sidebarr.open {
+  right: 0;
+  transform: translateX(0);
+}
+
+.sidebarr h2 {
+  text-align: center;
+  color: #66cc66;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.sidebarr ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebarr ul li {
+  margin-bottom: 15px;
+}
+
+.sidebarr ul li a {
+  text-decoration: none;
+  color: #ddd;
+  font-size: 18px;
+  font-weight: 500;
+  display: block;
+  padding: 12px 15px;
+  border-radius: 8px;
+  background-color: #3b3b4b;
+  transition: background-color 0.3s, transform 0.3s;
+  text-align: right;
+}
+
+.sidebarr ul li a:hover {
+  background-color: #66cc66;
+  color: white;
+  transform: translateX(5px);
+}
+
+/* خلفية داكنة عند فتح القائمة */
+.overlayy {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+  z-index: 998;
+}
+
+.overlayy.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* لون العنصر النشط */
+.sidebarr ul li a.active {
+  background-color: #66cc66;
+  color: white;
+}
+
+/* زر إغلاق القائمة الجانبية */
+.close-btn {
+  position: absolute;
+  top: 20px; /* المسافة من الأعلى */
+  right: 20px; /* المسافة من اليمين */
+  font-size: 28px; /* حجم الأيقونة */
+  color: #ff0000; /* لون الأيقونة الأحمر */
+  cursor: pointer; /* مؤشر الفأرة عند التمرير */
+  transition: color 0.3s, transform 0.3s; /* تأثيرات التفاعل */
+  width: 40px; /* عرض الأيقونة */
+  height: 40px; /* ارتفاع الأيقونة */
+  display: flex; /* لجعل الأيقونة في منتصف الحاوية */
+  justify-content: center; /* محاذاة أفقية */
+  align-items: center; /* محاذاة عمودية */
+}
+
+/* المربع الأخضر */
+.close-btn::before {
+  content: "";
+  position: absolute;
+  top: 0; /* تطابق مع الزر */
+  left: 0; /* تطابق مع الزر */
+  width: 100%; /* نفس عرض الزر */
+  height: 100%; /* نفس ارتفاع الزر */
+  background-color: #66cc66; /* اللون الأخضر */
+  z-index: -1; /* خلف الزر */
+  border-radius: 5px; /* زوايا دائرية */
+  transition: transform 0.3s, box-shadow 0.3s; /* تأثير عند التفاعل */
+}
+
+/* تأثير عند التمرير على المربع */
+.close-btn:hover::before {
+  transform: scale(1.1); /* تكبير المربع قليلاً */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* تعميق الظل */
+}
+
+/* تأثير عند التمرير على الزر */
+.close-btn:hover {
+  color: #cc0000; /* لون أغمق عند التمرير */
+  transform: scale(1.05); /* تكبير الزر قليلاً */
+}
+/* إضافة هذا النمط إلى ملف CSS الخاص بك */
+.sidebarr ul li a.active {
+  background-color: #66cc66; /* لون أخضر للقسم المختار */
+  color: white;
+  font-weight: bold;
+}
+.close-btn:hover {
+  color: #55bb55;
+}
+/* شعار الجامعة */
+.LogoKKU {
+    display: flex; /* يجعل الرابط عنصر مرن */
+    justify-content: center; /* توسيط المحتوى أفقياً */
+    align-items: center; /* توسيط المحتوى عمودياً */
+    text-align: center; /* توسيط النص داخل الرابط (إذا كان موجوداً) */
+    margin: 20px; /* إضافة مسافة خارجية */
+}
+
+.LogoKKU img {
+    max-width: 150px; /* تحديد الحد الأقصى لعرض الصورة */
+    height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
+}
+
+/* الدعم الفني */
+        .supportt-container {
+            position: fixed; /* لجعل العنصر ثابتًا في مكانه */
+            bottom: 20px; /* المسافة من الأسفل */
+            right: 20px; /* المسافة من اليمين */
+            display: flex;
+            flex-direction: column; /* جعل العناصر تتجه عموديًا */
+            align-items: center; /* محاذاة العناصر في الوسط */
+            text-decoration: none;
+            color: #007bff;
+            transition: transform 0.3s;
+            font-size: 14px; /* حجم أصغر للنص */
+        }
+        .supportt-container:hover {
+            transform: scale(1.05);
+        }
+        .supportt-icon {
+            font-size: 30px; /* حجم أصغر للأيقونة */
+            margin-bottom: 5px; /* مسافة بين الأيقونة والنص */
+        }
+/* االتبرع */
+.mony-container {
+    position: fixed; /* لجعل العنصر ثابتًا في مكانه */
+    bottom: 20px; /* المسافة من الأسفل */
+    left: 20px; /* المسافة من اليسار */
+    display: flex;
+    flex-direction: column; /* جعل العناصر تتجه عموديًا */
+    align-items: center; /* محاذاة العناصر في الوسط */
+    text-decoration: none;
+    color: #007bff;
+    transition: transform 0.3s;
+    font-size: 14px; /* حجم أصغر للنص */
+}
+
+.mony-container:hover {
+    transform: scale(1.05);
+}
+
+.mony-icon {
+    font-size: 30px; /* حجم أكبر للأيقونة */
+    margin-bottom: 5px; /* مسافة بين الأيقونة والنص */
+}
+
+/* لإضافة اتجاه النص */
+.mony-container {
+    direction: rtl; /* تغيير اتجاه النص إلى اليمين */
+}
+
+/* الحاوية التي تحتوي على عدد الزوار */
+.visitor-count {
+    display: flex;
+    justify-content: center; /* لتوسيط المحتوى أفقيًا */
+    align-items: center; /* لتوسيط المحتوى عموديًا */
+    background-color: #ffffff; /* خلفية بيضاء */
+    border: 1px solid #ddd; /* إطار خفيف */
+    border-radius: 8px; /* زوايا دائرية خفيفة */
+    padding: 8px 16px; /* مساحة داخلية صغيرة */
+    font-size: 0.75rem; /* حجم خط صغير */
+    color: #333333; /* لون النص */
+    text-align: center; /* النص في الوسط */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* ظل خفيف لإضافة عمق */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* تأثير سلس */
+    width: 85px; /* عرض صغير يناسب التصميم */ 
+    height: 15px; /* ارتفاع صغير يناسب التصميم */
+    margin: auto; /* لتوسيط العنصر على الصفحة */
+    margin-top: 4px; /* مسافة علوية صغيرة */
+    cursor: default; /* مؤشر عادي */
+}
+
+/* عند التمرير على العنصر (hover) */
+.visitor-count:hover {
+    transform: scale(1.05); /* تكبير خفيف جدًا */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* ظلال أوضح */
+}
+
+/* النصوص والأعداد داخل الحاوية */
+.visitor-count span {
+    color: #007BFF; /* لون أزرق مميز للأرقام */
+    font-weight: bold; /* الأرقام بخط غامق */
+    font-size: 0.75rem; /* حجم أكبر للأرقام */
+}

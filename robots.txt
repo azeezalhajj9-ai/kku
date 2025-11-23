@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://ahm.zzz.com.ua/kku/sitemap.xml
