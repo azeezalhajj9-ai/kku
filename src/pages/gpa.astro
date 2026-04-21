@@ -24,8 +24,14 @@ import Callout from "../components/Callout.astro";
 
   <section class="surface-card calculator-panel">
     <div class="calculator-head">
-      <h2>المواد</h2>
-      <button id="add-course" class="button button-secondary" type="button">إضافة مادة</button>
+      <div>
+        <h2>مواد الفصل</h2>
+        <p class="muted calculator-copy">أدخل ساعات كل مادة والتقدير النهائي لها، ويمكنك كتابة اسم المادة لسهولة التتبع.</p>
+      </div>
+      <div class="calculator-actions">
+        <button id="reset-courses" class="button button-secondary" type="button">إعادة التهيئة</button>
+        <button id="add-course" class="button button-secondary" type="button">إضافة مادة</button>
+      </div>
     </div>
     <div id="course-list" class="course-list"></div>
   </section>
@@ -72,41 +78,65 @@ import Callout from "../components/Callout.astro";
 
     const list = document.querySelector("#course-list");
     const addButton = document.querySelector("#add-course");
+    const resetButton = document.querySelector("#reset-courses");
     const gpaResult = document.querySelector("#gpa-result");
     const hoursResult = document.querySelector("#hours-result");
     const pointsResult = document.querySelector("#points-result");
     const ratingResult = document.querySelector("#rating-result");
 
     const courseTemplate = () => {
+      const courseNumber = list.children.length + 1;
       const row = document.createElement("div");
       row.className = "course-row";
       row.innerHTML = `
-        <label>
+        <div class="course-row-head">
+          <strong>مادة ${courseNumber}</strong>
+          <button type="button" class="remove-course">حذف</button>
+        </div>
+        <label class="course-field course-name">
+          <span>اسم المادة</span>
+          <input type="text" class="course-title" placeholder="اختياري" />
+        </label>
+        <label class="course-field">
           <span>الساعات</span>
           <input type="number" min="0" step="1" value="3" class="course-hours" />
         </label>
-        <label>
+        <label class="course-field">
           <span>التقدير</span>
           <select class="course-grade">
-            <option>A+</option>
-            <option>A</option>
-            <option>B+</option>
-            <option selected>B</option>
-            <option>C+</option>
-            <option>C</option>
-            <option>D+</option>
-            <option>D</option>
-            <option>F</option>
+            <option value="A+">A+ | ممتاز مرتفع | 5.00</option>
+            <option value="A">A | ممتاز | 4.75</option>
+            <option value="B+">B+ | جيد جداً مرتفع | 4.50</option>
+            <option value="B" selected>B | جيد جداً | 4.00</option>
+            <option value="C+">C+ | جيد مرتفع | 3.50</option>
+            <option value="C">C | جيد | 3.00</option>
+            <option value="D+">D+ | مقبول مرتفع | 2.50</option>
+            <option value="D">D | مقبول | 2.00</option>
+            <option value="F">F | متعثر | 1.00</option>
           </select>
         </label>
-        <button type="button" class="remove-course button button-secondary">حذف</button>
       `;
       row.querySelector(".remove-course").addEventListener("click", () => {
         row.remove();
+        renumberCourses();
         calculate();
       });
       row.querySelectorAll("input, select").forEach((el) => el.addEventListener("input", calculate));
       return row;
+    };
+
+    const renumberCourses = () => {
+      document.querySelectorAll(".course-row").forEach((row, index) => {
+        const label = row.querySelector(".course-row-head strong");
+        if (label) label.textContent = `مادة ${index + 1}`;
+      });
+    };
+
+    const seedCourses = (count = 4) => {
+      list.innerHTML = "";
+      for (let i = 0; i < count; i += 1) list.appendChild(courseTemplate());
+      renumberCourses();
+      calculate();
     };
 
     const calculate = () => {
@@ -128,11 +158,13 @@ import Callout from "../components/Callout.astro";
 
     addButton?.addEventListener("click", () => {
       list.appendChild(courseTemplate());
+      renumberCourses();
       calculate();
     });
 
-    for (let i = 0; i < 4; i += 1) list.appendChild(courseTemplate());
-    calculate();
+    resetButton?.addEventListener("click", () => seedCourses());
+
+    seedCourses();
   </script>
 </ArticleLayout>
 
@@ -144,10 +176,20 @@ import Callout from "../components/Callout.astro";
 
   .calculator-head {
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: space-between;
     gap: 1rem;
     margin-bottom: 1rem;
+  }
+
+  .calculator-copy {
+    margin-top: 0.5rem;
+  }
+
+  .calculator-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
   }
 
   .course-list {
@@ -157,14 +199,43 @@ import Callout from "../components/Callout.astro";
 
   .course-row {
     display: grid;
-    grid-template-columns: 140px 1fr auto;
-    gap: 0.8rem;
+    grid-template-columns: minmax(0, 1.25fr) 140px minmax(240px, 1fr);
+    gap: 0.9rem;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.7);
     align-items: end;
   }
 
-  .course-row label {
+  .course-row-head {
+    display: grid;
+    gap: 0.55rem;
+    align-self: stretch;
+    align-content: space-between;
+  }
+
+  .course-row-head strong {
+    font-size: 1rem;
+  }
+
+  .remove-course {
+    width: fit-content;
+    border: 0;
+    padding: 0;
+    background: none;
+    color: #8d4a3a;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .course-field {
     display: grid;
     gap: 0.35rem;
+  }
+
+  .course-name {
+    min-width: 0;
   }
 
   .course-row input,
@@ -190,9 +261,30 @@ import Callout from "../components/Callout.astro";
   }
 
   @media (max-width: 860px) {
+    .calculator-head,
     .course-row,
     .result-panel {
       grid-template-columns: 1fr;
+    }
+
+    .course-row-head {
+      align-content: start;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .calculator-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      width: 100%;
+    }
+
+    .calculator-actions .button {
+      width: 100%;
+    }
+
+    .course-row {
+      padding: 0.9rem;
     }
   }
 </style>
