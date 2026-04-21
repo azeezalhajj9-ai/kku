@@ -61,3 +61,4 @@ If the repository name changes, update `base` in [astro.config.mjs](/C:/Users/pc
 
 - Image-based legacy references such as the academic calendar, deanship contacts, and apology workflow were preserved as static assets inside `public/images/`.
 - The final exam page keeps the old dates from the legacy site only as archived references and does not present them as current dates.
+- The site is intended to be deployed through GitHub Pages using the repository workflow.
