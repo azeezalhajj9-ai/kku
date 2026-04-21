@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>KKU Guide</title>
+  <rect width="64" height="64" rx="16" fill="#f4efe6"/>
+  <path d="M18 48V16h6v13l13-13h8L31 30l16 18h-8L26 33l-2 2v13h-6Z" fill="#223127"/>
+</svg>
