@@ -127,6 +127,7 @@ import { withBase } from "../data/paths";
     background: rgba(255, 255, 255, 0.76);
     border: 1px solid var(--line);
     text-decoration: none;
+    text-align: start;
   }
 
   .sidebar-body span {
@@ -138,6 +139,25 @@ import { withBase } from "../data/paths";
     .sidebar-backdrop,
     .site-sidebar {
       display: none;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .site-sidebar {
+      width: 100vw;
+      padding: 0.85rem;
+    }
+
+    .sidebar-body {
+      gap: 1rem;
+    }
+
+    .sidebar-body a {
+      padding: 0.85rem 0.9rem;
+    }
+
+    .sidebar-body span {
+      font-size: 0.86rem;
     }
   }
 </style>

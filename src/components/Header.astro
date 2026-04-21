@@ -128,4 +128,30 @@ const homeHref = import.meta.env.BASE_URL;
       display: inline-flex;
     }
   }
+
+  @media (max-width: 520px) {
+    .header-inner {
+      min-height: 4.2rem;
+    }
+
+    .brand {
+      gap: 0.65rem;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 2.3rem;
+      height: 2.3rem;
+      font-size: 0.78rem;
+      flex: 0 0 auto;
+    }
+
+    .brand-copy strong {
+      font-size: 0.9rem;
+    }
+
+    .brand-copy small {
+      font-size: 0.76rem;
+    }
+  }
 </style>
